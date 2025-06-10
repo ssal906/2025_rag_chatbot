@@ -35,7 +35,7 @@ li[role="option"] {
 
 /* 질문 입력창 placeholder 텍스트 색상 설정 */
 textarea::placeholder {
-    color: #4B5563 #4B5563 !important; /* 여기에 원하는 HEX 코드 */
+    color: #4B5563 !important; /* 여기에 원하는 HEX 코드 */
     opacity: 1 #4B5563 !important;
 }
 
