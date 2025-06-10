@@ -35,8 +35,8 @@ li[role="option"] {
 
 /* 질문 입력창 placeholder 텍스트 색상 설정 */
 textarea::placeholder {
-    color: #4B5563 #4B5563; /* 여기에 원하는 HEX 코드 */
-    opacity: 1 #4B5563;
+    color: #4B5563 #4B5563 !important; /* 여기에 원하는 HEX 코드 */
+    opacity: 1 #4B5563 !important;
 }
 
 section[data-testid="stSidebar"] {
@@ -64,18 +64,22 @@ div[data-baseweb="select"] > div {
 def render_example_block(text: str):
     styled_html = f"""
     <div style="
-        background-color: #254D70;
-        color: white;
+        background-color: #1F2A40 !important;
+        color: #FFFFFF !important;
         padding: 20px;
-        border-radius: 10px;
+        border-radius: 12px;
         font-size: 16px;
         font-family: 'Nanum Myeongjo', 'Gowun Batang', serif;
         white-space: pre-wrap;
+        line-height: 1.6;
+        border: 1px solid #3A4C66;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         ">
         {text}
     </div>
     """
     st.markdown(styled_html, unsafe_allow_html=True)
+
 
         
 def contains_legal_example(text: str):
