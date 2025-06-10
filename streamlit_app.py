@@ -33,7 +33,11 @@ li[role="option"] {
     color: #000000 !important;
 }
 
-
+/* 질문 입력창 placeholder 텍스트 색상 설정 */
+textarea::placeholder {
+    color: #4B5563 #4B5563; /* 여기에 원하는 HEX 코드 */
+    opacity: 1 #4B5563;
+}
 
 section[data-testid="stSidebar"] {
     color:#27391C  !important;
