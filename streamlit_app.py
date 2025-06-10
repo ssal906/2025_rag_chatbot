@@ -45,7 +45,7 @@ section[data-testid="stSidebar"] > div:first-child {
 
 /* 멀티라인 입력 */
 textarea {
-    background-color: #295F98 !important;
+    background-color: #444950 !important;
     color: white !important;
 }
 
