@@ -54,11 +54,30 @@ div[data-baseweb="select"] > div {
     color: #111827 !important;
     border-radius: 8px !important;
 
-
-
-
 </style>
 """, unsafe_allow_html=True)
+
+def render_example_block(text: str):
+    styled_html = f"""
+    <div style="
+        background-color: #254D70;
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        font-size: 16px;
+        font-family: 'Nanum Myeongjo', 'Gowun Batang', serif;
+        white-space: pre-wrap;
+        ">
+        {text}
+    </div>
+    """
+    st.markdown(styled_html, unsafe_allow_html=True)
+
+        
+def contains_legal_example(text: str):
+    example_keywords = ["고소장", "합의서", "계약서", "예시:", "고   소   장", "합   의   서"]
+    return any(keyword in text for keyword in example_keywords)
+
 
 # ✅ 제목
 st.title("민법 상담 챗봇")
@@ -112,6 +131,7 @@ for filename, file_id in files_to_download.items():
     if not os.path.exists(local_path):
         st.info(f"📥 {filename} 다운로드 중...")
         download_file_from_drive(file_id, local_path)
+
 
 
 BASE_DIR="precomputed"
@@ -360,7 +380,11 @@ if menu_option == "🤖 챗봇":
             config = {"configurable": {"session_id": "any"}}
             response = conversational_rag_chain.invoke({"input": prompt}, config)
             answer = response.get("answer", "답변을 생성하지 못했습니다.")
-            st.markdown(f"<div class='chat-bubble-ai'>{answer}</div>", unsafe_allow_html=True)
+            if contains_legal_example(answer):
+                render_example_block(answer)  # 예시니까 검정 배경 출력
+            else:
+                st.markdown(f"<div class='chat-bubble-ai'>{answer}</div>", unsafe_allow_html=True)
+
 
 # ✅ 소개 페이지
 elif menu_option == "📘 프로젝트 소개":
