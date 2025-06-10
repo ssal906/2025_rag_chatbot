@@ -16,9 +16,7 @@ from langchain_community.chat_message_histories.streamlit import StreamlitChatMe
 # ✅ 페이지 설정
 st.set_page_config(page_title="민법 상담 챗봇", layout="centered")
 
-# ✅ 폰트 및 스타일 설정
 st.markdown("""
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Gowun+Batang&display=swap" rel="stylesheet">
 <style>
 body, p, div, span, h1, h2, h3, h4, h5, h6, label, textarea {
     font-family: 'Nanum Myeongjo', 'Gowun Batang', serif !important;
@@ -26,64 +24,53 @@ body, p, div, span, h1, h2, h3, h4, h5, h6, label, textarea {
 }
 
 
+div[data-baseweb="select"] > div {
+    background-color: #626F47 !important;
+    color: white !important;
+    border-radius: 20px !important;
+    border: none !important;           
+    box-shadow: none !important;       
+}
+
 li[role="option"] {
     background-color: #27391C !important;
-    color: #000000 !important;
+    color: black !important;
 }
 
-/* 질문 입력창 placeholder 텍스트 색상 설정 */
-textarea::placeholder {
-    color: #4B5563 !important; /* 여기에 원하는 HEX 코드 */
-    opacity: 1 !important;
-}
-
-section[data-testid="stSidebar"] {
-    color:#27391C  !important;
+/* 사이드바 */
+section[data-testid="stSidebar"] > div:first-child {
+    background-color: #18230F !important;
 }
 
 
-/* 모델 선택 드롭다운과 상담 분류 드롭다운 배경 흰색으로 */
-div[data-baseweb="select"] > div {
-    background-color:#18230F !important;
-    color: black !important;  /* 텍스트는 검정으로 */
-    border-radius: 8px !important;
+/* 멀티라인 입력 */
+textarea {
+    background-color: #295F98 !important;
+    color: white !important;
 }
 
+/* 사용자 말풍선 */
+.chat-bubble-human {
+    background-color: #789DBC;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 1rem;
+    color: #F0F0F0;
+    max-width: 65%;
+    margin-left: auto;
+}
 
-.stAlert {
-    opacity:0.7 !important;
-    background-color:#658147 !important;
-    color: #111827 !important;
-    border-radius: 8px !important;
-
+/* AI 말풍선 */
+.chat-bubble-ai {
+    background-color: #254D70;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 1rem;
+    color: #111827;
+    max-width: 65%;
+}
 </style>
 """, unsafe_allow_html=True)
-
-def render_example_block(text: str):
-    styled_html = f"""
-    <div style="
-        background-color: #1F2A40 !important;
-        color: #FFFFFF !important;
-        padding: 20px;
-        border-radius: 12px;
-        font-size: 16px;
-        font-family: 'Nanum Myeongjo', 'Gowun Batang', serif;
-        white-space: pre-wrap;
-        line-height: 1.6;
-        border: 1px solid #3A4C66;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        ">
-        {text}
-    </div>
-    """
-    st.markdown(styled_html, unsafe_allow_html=True)
-
-
-        
-def contains_legal_example(text: str):
-    example_keywords = ["고소장", "합의서", "계약서", "예시:", "고   소   장", "합   의   서"]
-    return any(keyword in text for keyword in example_keywords)
-
 
 # ✅ 제목
 st.title("민법 상담 챗봇")
@@ -162,41 +149,33 @@ def add_bg_from_local(image_path):
         background-attachment: fixed;
         background-position: center;
     }}
-    .chat-bubble-ai {{
-        background-color: #254D70;
-        border-radius: 12px;
-        padding: 14px 18px;
-        margin-bottom: 1rem;
-        color: #111827;
-        max-width: 65%;
-    }}
-    .chat-bubble-human {{
-        background-color: #789DBC;
-        border-radius: 12px;
-        padding: 14px 18px;
-        margin-bottom: 1rem;
-        color: #F0F0F0;
-        max-width: 65%;
-        margin-left: auto;
-    }}
-    .stSelectbox > div > div {{
-        background-color: A4B465 !important;
-        color: #111827 !important;
-        border-radius: 8px;
-    }}
-    section[data-testid="stSidebar"] {{
-        background-color: #626F47 !important;
-    }}
-
-    .stTextInput > div > div > input {{
-        background-color: F4E0AF5);
-        color: #A7C1A8;
-    }}
-    </style>
+ </style>
     """, unsafe_allow_html=True)
 
+def render_example_block(text: str):
+    styled_html = f"""
+    <div style="
+        background-color: #254D70;
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        font-size: 16px;
+        font-family: 'Nanum Myeongjo', 'Gowun Batang', serif;
+        white-space: pre-wrap;
+        ">
+        {text}
+    </div>
+    """
+    st.markdown(styled_html, unsafe_allow_html=True)
+
+        
+def contains_legal_example(text: str):
+    example_keywords = ["고소장", "합의서", "계약서", "예시:", "고   소   장", "합   의   서"]
+    return any(keyword in text for keyword in example_keywords)
+
+
 # ✅ 배경 이미지 경로 설정
-add_bg_from_local("background.jpg")
+add_bg_from_local("C:/Users/sbin0/Desktop/3-1/인공지능서비스개발/background.jpg")
 
 # ✅ 사이드바 메뉴
 st.sidebar.title("🔧 메뉴")
@@ -209,13 +188,6 @@ CATEGORIES = [
     "상담 분류를 지정해주세요", "고소장", "합의서", 
     "교통(자동차)", "사기 및 형사", "부동산", "노동", "대금", "손해배상", "상속", "계약", "기타"
 ]
-
-
-
-
-
-
-
 
 
 
