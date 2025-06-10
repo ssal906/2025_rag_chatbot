@@ -26,8 +26,6 @@ body, p, div, span, h1, h2, h3, h4, h5, h6, label, textarea {
 }
 
 
-<style>
-
 li[role="option"] {
     background-color: #27391C !important;
     color: #000000 !important;
@@ -36,7 +34,7 @@ li[role="option"] {
 /* 질문 입력창 placeholder 텍스트 색상 설정 */
 textarea::placeholder {
     color: #4B5563 !important; /* 여기에 원하는 HEX 코드 */
-    opacity: 1 #4B5563 !important;
+    opacity: 1 !important;
 }
 
 section[data-testid="stSidebar"] {
