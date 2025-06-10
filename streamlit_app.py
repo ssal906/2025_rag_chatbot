@@ -42,6 +42,9 @@ section[data-testid="stSidebar"] > div:first-child {
     background-color: #18230F !important;
 }
 
+input[type="text"] {
+    color: #222222 !important;  /* 진한 회색 */
+}
 
 /* 사용자 말풍선 */
 .chat-bubble-human {
