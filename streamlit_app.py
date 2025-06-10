@@ -16,72 +16,41 @@ from langchain_community.chat_message_histories.streamlit import StreamlitChatMe
 # ✅ 페이지 설정
 st.set_page_config(page_title="민법 상담 챗봇", layout="centered")
 
-# ✅ 스타일 적용
-encoded_background = ""
-if os.path.exists("background.jpg"):
-    with open("background.jpg", "rb") as f:
-        encoded_background = base64.b64encode(f.read()).decode()
-
-st.markdown(f"""
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Gowun+Batang&display=swap" rel="stylesheet">
+st.markdown("""
 <style>
-body, p, div, span, h1, h2, h3, h4, h5, h6, label, textarea {{
+body, p, div, span, h1, h2, h3, h4, h5, h6, label, textarea {
     font-family: 'Nanum Myeongjo', 'Gowun Batang', serif !important;
     color: #FFFFFF !important;
-}}
+}
 
-.stApp {{
-    background-color: #0f172a !important;
-    {'background-image: url("data:image/jpg;base64,' + encoded_background + '");' if encoded_background else ''}
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
-    color: white !important;
-}}
 
-/* 드롭다운 */
-div[data-baseweb="select"] > div {{
+div[data-baseweb="select"] > div {
     background-color: #626F47 !important;
     color: white !important;
     border-radius: 20px !important;
-    border: none !important;
-    box-shadow: none !important;
-}}
-li[role="option"] {{
+    border: none !important;           
+    box-shadow: none !important;       
+}
+
+li[role="option"] {
     background-color: #27391C !important;
     color: black !important;
-}}
+}
 
 /* 사이드바 */
-section[data-testid="stSidebar"] > div:first-child {{
+section[data-testid="stSidebar"] > div:first-child {
     background-color: #18230F !important;
-    color: white !important;
-}}
+}
 
-/* 입력창 전체 영역 */
-div[data-testid="stChatInput"] {{
+
+/* 멀티라인 입력 */
+textarea {
     background-color: #295F98 !important;
-    border-radius: 24px !important;
-    padding: 0.5rem 1rem !important;
-    border: 1px solid #3A4C66 !important;
     color: white !important;
-}}
+}
 
-textarea {{
-    background-color: transparent !important;
-    color: white !important;
-}}
-
-textarea::placeholder {{
-    color: #cbd5e1 !important;
-    opacity: 1 !important;
-}}
-
-button[kind="icon"] svg {{
-    color: white !important;
-}}
-
-.chat-bubble-human {{
+/* 사용자 말풍선 */
+.chat-bubble-human {
     background-color: #789DBC;
     border-radius: 12px;
     padding: 14px 18px;
@@ -89,16 +58,17 @@ button[kind="icon"] svg {{
     color: #F0F0F0;
     max-width: 65%;
     margin-left: auto;
-}}
+}
 
-.chat-bubble-ai {{
+/* AI 말풍선 */
+.chat-bubble-ai {
     background-color: #254D70;
     border-radius: 12px;
     padding: 14px 18px;
     margin-bottom: 1rem;
     color: #111827;
     max-width: 65%;
-}}
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -160,6 +130,29 @@ for filename, file_id in files_to_download.items():
 
 BASE_DIR="precomputed"
 
+
+
+
+
+# ✅ 배경 이미지 삽입 함수
+def add_bg_from_local(image_path):
+    with open(image_path, "rb") as img_file:
+        encoded = base64.b64encode(img_file.read()).decode()
+    st.markdown(f"""
+    <style>
+    html, body, [class*="css"] {{
+        font-family: 'Nanum Myeongjo', 'Gowun Batang', serif;
+        color: #000000 !important;
+    }}
+    .stApp {{
+        background-image: url("data:image/jpg;base64,{encoded}");
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+    }}
+ </style>
+    """, unsafe_allow_html=True)
+
 def render_example_block(text: str):
     styled_html = f"""
     <div style="
@@ -180,6 +173,10 @@ def render_example_block(text: str):
 def contains_legal_example(text: str):
     example_keywords = ["고소장", "합의서", "계약서", "예시:", "고   소   장", "합   의   서"]
     return any(keyword in text for keyword in example_keywords)
+
+
+# ✅ 배경 이미지 경로 설정
+add_bg_from_local("background.jpg")
 
 # ✅ 사이드바 메뉴
 st.sidebar.title("🔧 메뉴")
