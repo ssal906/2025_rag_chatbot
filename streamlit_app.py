@@ -69,6 +69,30 @@ textarea {
     color: #111827;
     max-width: 65%;
 }
+/* 입력창 전체 감싸는 영역 */
+div[data-testid="stChatInput"] {
+    background-color: #295F98 !important;
+    border-radius: 25px !important;
+    padding: 0.5rem 1rem !important;
+    border: 1px solid #3A4C66 !important;
+}
+
+/* 텍스트 입력창 내부 */
+textarea {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+/* placeholder 색상 */
+textarea::placeholder {
+    color: #9CA3AF !important;
+    opacity: 1 !important;
+}
+
+/* 전송 버튼 아이콘 */
+button[kind="icon"] svg {
+    color: #9CA3AF !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
