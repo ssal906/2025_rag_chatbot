@@ -181,10 +181,6 @@ def contains_legal_example(text: str):
     example_keywords = ["고소장", "합의서", "계약서", "예시:", "고   소   장", "합   의   서"]
     return any(keyword in text for keyword in example_keywords)
 
-
-# ✅ 배경 이미지 경로 설정
-add_bg_from_local("background.jpg")
-
 # ✅ 사이드바 메뉴
 st.sidebar.title("🔧 메뉴")
 menu_option = st.sidebar.radio("페이지 선택", ["🤖 챗봇", "📘 프로젝트 소개"])
