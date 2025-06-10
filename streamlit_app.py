@@ -17,19 +17,21 @@ from langchain_community.chat_message_histories.streamlit import StreamlitChatMe
 st.set_page_config(page_title="민법 상담 챗봇", layout="centered")
 
 st.markdown("""
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Gowun+Batang&display=swap" rel="stylesheet">
 <style>
+/* 기본 폰트와 텍스트 색 */
 body, p, div, span, h1, h2, h3, h4, h5, h6, label, textarea {
-    font-family: 'Nanum Myeongjo', 'Gowun Batang', serif !important;
+    font-family: 'Nanum Myeongjo', 'Gowun+Batang', serif !important;
     color: #FFFFFF !important;
 }
 
-
+/* 드롭다운 스타일 */
 div[data-baseweb="select"] > div {
     background-color: #626F47 !important;
     color: white !important;
     border-radius: 20px !important;
-    border: none !important;           
-    box-shadow: none !important;       
+    border: none !important;
+    box-shadow: none !important;
 }
 
 li[role="option"] {
@@ -37,19 +39,39 @@ li[role="option"] {
     color: black !important;
 }
 
-/* 사이드바 */
+/* 사이드바 배경 */
 section[data-testid="stSidebar"] > div:first-child {
     background-color: #18230F !important;
-}
-
-
-/* 멀티라인 입력 */
-textarea {
-    background-color: #295F98 !important;
     color: white !important;
 }
 
-/* 사용자 말풍선 */
+/* ✅ 질문 입력창 전체 스타일 */
+div[data-testid="stChatInput"] {
+    background-color: #295F98 !important;
+    border-radius: 24px !important;
+    padding: 0.5rem 1rem !important;
+    border: 1px solid #3A4C66 !important;
+    color: white !important;
+}
+
+/* ✅ 입력창 텍스트 */
+textarea {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+/* ✅ 입력창 placeholder 텍스트 */
+textarea::placeholder {
+    color: #cbd5e1 !important; /* 밝은 slate-gray */
+    opacity: 1 !important;
+}
+
+/* ✅ 전송 버튼 화살표 */
+button[kind="icon"] svg {
+    color: white !important;
+}
+
+/* ✅ 사용자 말풍선 */
 .chat-bubble-human {
     background-color: #789DBC;
     border-radius: 12px;
@@ -60,7 +82,7 @@ textarea {
     margin-left: auto;
 }
 
-/* AI 말풍선 */
+/* ✅ AI 말풍선 */
 .chat-bubble-ai {
     background-color: #254D70;
     border-radius: 12px;
@@ -68,6 +90,12 @@ textarea {
     margin-bottom: 1rem;
     color: #111827;
     max-width: 65%;
+}
+
+/* ✅ 앱 전체 배경 고정 */
+.stApp {
+    background-color: #0f172a !important;  /* 어두운 배경 */
+    color: white !important;
 }
 </style>
 """, unsafe_allow_html=True)
