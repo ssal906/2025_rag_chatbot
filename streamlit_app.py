@@ -42,6 +42,13 @@ section[data-testid="stSidebar"] > div:first-child {
     background-color: #18230F !important;
 }
 
+
+/* 멀티라인 입력 */
+textarea {
+    background-color: #295F98 !important;
+    color: white !important;
+}
+
 /* 사용자 말풍선 */
 .chat-bubble-human {
     background-color: #789DBC;
@@ -62,30 +69,6 @@ section[data-testid="stSidebar"] > div:first-child {
     color: #111827;
     max-width: 65%;
 }
-
-/* 입력창 전체 감싸는 영역 */
-div[data-testid="stChatInput"] {
-    background-color: #295F98 !important;
-    border-radius: 25px !important;
-    padding: 0 !important;          /* ← 패딩 0으로 */
-    border: 1px solid #3A4C66 !important;
-    display: flex;                  /* ← 내부 요소가 좌우로 딱 붙게 */
-    align-items: center;
-}
-
-/* 텍스트 입력창 내부 */
-textarea {
-    background-color: transparent !important;
-    color: white !important;
-    border-radius: 25px !important; /* ← 전체 영역과 맞추기 */
-    padding: 0.5rem 1rem !important; /* 좌측 패딩 최소로(0~0.5rem) */
-    margin: 0 !important;
-    box-shadow: none !important;
-    border: none !important;
-    width: 100% !important;
-    resize: none !important;
-}
-
 </style>
 """, unsafe_allow_html=True)
 
