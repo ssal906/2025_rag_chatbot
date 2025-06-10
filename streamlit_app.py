@@ -175,7 +175,7 @@ def contains_legal_example(text: str):
 
 
 # ✅ 배경 이미지 경로 설정
-add_bg_from_local("C:/Users/sbin0/Desktop/3-1/인공지능서비스개발/background.jpg")
+add_bg_from_local("background.jpg")
 
 # ✅ 사이드바 메뉴
 st.sidebar.title("🔧 메뉴")
