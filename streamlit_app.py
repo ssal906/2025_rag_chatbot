@@ -124,7 +124,7 @@ def add_bg_from_local(image_path):
     """, unsafe_allow_html=True)
 
 # ✅ 배경 이미지 경로 설정
-add_bg_from_local(background.jpg")
+add_bg_from_local("background.jpg")
 
 # ✅ 사이드바 메뉴
 st.sidebar.title("🔧 메뉴")
