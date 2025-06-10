@@ -43,12 +43,6 @@ section[data-testid="stSidebar"] > div:first-child {
 }
 
 
-/* 멀티라인 입력 */
-textarea {
-    background-color: #555555 !important;
-    color: white !important;
-}
-
 /* 사용자 말풍선 */
 .chat-bubble-human {
     background-color: #789DBC;
