@@ -67,6 +67,52 @@ st.title("민법 상담 챗봇")
 #load_dotenv()
 os.environ["OPENAI_API_KEY"] = st.secrets['OPENAI_API_KEY']
 
+import requests
+
+def download_file_from_drive(file_id: str, save_path: str):
+    """Google Drive에서 파일을 다운로드합니다."""
+    url = f"https://drive.google.com/uc?export=download&id={file_id}"
+    response = requests.get(url)
+    os.makedirs(os.path.dirname(save_path), exist_ok=True)
+    with open(save_path, "wb") as f:
+        f.write(response.content)
+    st.success(f"✅ {os.path.basename(save_path)} 다운로드 완료!")
+
+# ✅ 다운로드 대상 목록 (예시)
+files_to_download = {
+    "pdf_documents.pkl": "15o-tCm2g-CyFN-VRNpUFc57hfOsvAHYg",
+    "pdf_embeddings.pkl": "1JNHnhQdydc74Nb0N1iyWSkzbWiF2U8mb",
+    "고소장_documents.pkl": "1FAGxnRHdnp1byu83HIIrOshIa_yhm24m",
+    "고소장_embeddings.pkl": "1A8RURLc1MNa4wQbkQGy_fysfR8tOX7ja",
+    "계약_documents.pkl" : "1jSOlWeigzOFhBdTf3bKHbmAA9Vf1XzMi",
+    "계약_embeddings.pkl" : "1wXRpI9nsa9zzb60wZ8xqrMeQ-MKYq5ao",
+    "교통(자동차)_documents.pkl" : "13LiyWLI_lYYc0Fd6R0bVzww7i7ETfJ3d",
+    "교통(자동차)_embeddings.pkl" : "1OBqMxzVIYSgj1hXEwPPLcEamj3ybykUn",
+    "기타_documents.pkl" : "17GDNfaCYei9218LM2hS7OzaEaaL7O-_D",
+    "기타_embeddings.pkl" : "1GTKpR8ZvEa-dePD_rtnzVxJxvIAMnOfl",
+    "노동_documents.pkl" : "1AhhiJQSWuFQB6EUYPsYjvklt4FuNTvyx",
+    "노동_embeddings.pkl" : "1wQHEUqR0gzTk6cel-4qu2B8BPCZgQ76o",
+    "대금_documents.pkl" : "1s3sntC64PPr6enojAWgNSCdi6WEjJ7MM",
+    "대금_embeddings.pkl" : "1xg-muxmIaq668YHzy6zmojhmKFiK5JOX",
+    "부동산_documents.pkl" : "16Ms2bgGhmUnCTHymCqUL0aLh8I1g5igX",
+    "부동산_embeddings.pkl" : "1OxWUcwj3qDXmJbp3p626P82i1_4uehD3",
+    "사기 및 형사_documents.pkl" : "1YAbXEGuaXjtn1fvHwOM7BKhU3QN8gO5M",
+    "사기 및 형사_embeddings.pkl" : "1LCc4OoTBBSxTcA7tUFG34V6LL47ltgRT",
+    "상속_documents.pkl" : "1c1kEpXG5u-5uA217ELvgFUfOOpmgp6CE",
+    "상속_embeddings.pkl" : "1cYYxp8UiaMBcV0DFbr3dnNKGeJuJRjZx",
+    "손해배상_documents.pkl" : "1k_Fd6Hoag1RDRvp5Vc_yOXPWq3gzDXip",
+    "손해배상_embeddings.pkl" : "1v4B65q6gdyk-PVNlDoIRdjIf0ipFySH4",
+    "합의서_documents.pkl" : "12MpaJYWMx1rRm5f5l3H0uZapY2HM8ihz",
+    "합의서_embeddings.pkl" : "1yOV9v-uy31t4r10Qbv0dXLZC9stdpIcU"
+}
+
+# ✅ 파일 존재 여부 확인 후 다운로드
+for filename, file_id in files_to_download.items():
+    local_path = os.path.join("precomputed", filename)
+    if not os.path.exists(local_path):
+        st.info(f"📥 {filename} 다운로드 중...")
+        download_file_from_drive(file_id, local_path)
+
 
 BASE_DIR="precomputed"
 
